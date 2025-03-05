@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  name     String
+  surname  String
+  phone    String
+  psn      String  @unique
+  cars     Car[]
+  sales    Transaction[] @relation("UserSales")
+  purchases Transaction[] @relation("UserPurchases")
+}
+
+model Car {
+  id          String        @id @default(uuid())
+  brand       String
+  model       String
+  year        Int
+  price       Float
+  ownerId     String
+  owner       User          @relation(fields: [ownerId], references: [id])
+  transactions Transaction[]
+}
+
+
+model Transaction {
+  id        String   @id @default(uuid())
+  carId     String   
+  sellerId  String
+  buyerId   String
+  price     Float
+  status    String   @default("pending") 
+  buyerConfirmed  Boolean  @default(false)  
+  sellerConfirmed Boolean  @default(false) 
+  createdAt DateTime @default(now())
+
+  car       Car      @relation(fields: [carId], references: [id])
+  seller    User     @relation(fields: [sellerId], references: [id], name: "UserSales")
+  buyer     User     @relation(fields: [buyerId], references: [id], name: "UserPurchases")
+}
+
