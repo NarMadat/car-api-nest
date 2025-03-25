@@ -14,8 +14,17 @@ model User {
   password String
   name     String
   surname  String
+  middle_name String?
+  year String?
+  citizenship String?
+  country String?
+  region String?
+  province String?
+  city String?
+  street String?
+  mail_code String?
   phone    String
-  psn      String  @unique
+  psn      String @unique
   cars     Car[]
   sales    Transaction[] @relation("UserSales")
   purchases Transaction[] @relation("UserPurchases")
@@ -25,6 +34,14 @@ model Car {
   id          String        @id @default(uuid())
   brand       String
   model       String
+  type String? // Թեթև մարդատար
+  body_type String? // Sedan
+  color String?
+  vin String?
+  frame_number String? // Հենասարքի համարը AZ27346872
+  body_number String? // Թափքի համարը AZ209403
+  plate_number String?
+  horsepower Int? 
   year        Int
   price       Float
   ownerId     String

@@ -22,6 +22,7 @@ export class CarController {
   @ApiOperation({ summary: 'Add a new vehicle' })
   @ApiResponse({ status: 201, description: 'Vehicle added successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
+
   async addCar(@Body() dto: CreateCarDto, @Req() req) {
     const ownerId = req.user?.userId;
     return this.carService.addCar(dto, ownerId);
@@ -32,6 +33,7 @@ export class CarController {
   @ApiOperation({ summary: 'Retrieve vehicles of the authenticated user' })
   @ApiResponse({ status: 200, description: 'List of user vehicles retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
+  
   async getUserCars(@Req() req) {
     const userId = req.user?.userId;
     if (!userId) {

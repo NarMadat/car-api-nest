@@ -15,7 +15,7 @@ export class TransactionController {
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async createTransaction(@Body() dto: CreateTransactionDto, @Req() req) {
-    const sellerId = req.user.userId; // ID продавца из токена
+    const sellerId = req.user.userId; 
     return this.transactionService.createTransaction(dto, sellerId);
   }
 

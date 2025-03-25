@@ -22,7 +22,7 @@ export class TransactionService {
     }
 
     const buyer = await this.prisma.user.findUnique({
-      where: { email: dto.buyerEmail },
+      where: { psn: dto.psn },
     });
 
     if (!buyer) {
@@ -62,7 +62,7 @@ export class TransactionService {
   }
 
   async confirmTransaction(transactionId: string, userId: string) {
-    console.log('🚀 User confirms transaction:', transactionId);
+    console.log(' User confirms transaction:', transactionId);
   
     const transaction = await this.prisma.transaction.findUnique({
       where: { id: transactionId },

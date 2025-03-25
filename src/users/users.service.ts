@@ -15,6 +15,15 @@ export class UsersService {
         surname: true,
         phone: true,
         psn: true,
+        year: true,
+        middle_name: true,
+        citizenship: true,
+        country: true,
+        region: true,
+        province: true,
+        city: true,
+        street: true,
+        mail_code: true,
       },
     });
 
@@ -35,6 +44,7 @@ export class UsersService {
         email: true,
         name: true,
         surname: true,
+        year: true,
         phone: true,
       },
     });
@@ -49,6 +59,7 @@ export class UsersService {
       name: this.maskName(user.name),
       surname: this.maskName(user.surname),
       phone: this.maskPhone(user.phone),
+      year: user.year
     };
   }
 
